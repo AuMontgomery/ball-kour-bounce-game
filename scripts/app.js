@@ -61,7 +61,7 @@ class Player {
 
 		this.bounceTime = 2000;
 		this.timeSinceLastBounce = 0;
-		this.radius = 16;
+		this.radius = 20;
 
 		this.leftSide = this.x - this.radius / 2;
 		this.rightSide = this.x + this.radius / 2;
@@ -186,14 +186,14 @@ class Game {
 			this.imageHeight
 		);
 
-		ctx.fillStyle = "hsla(120, 100%, 50%, 0.2)";
+		ctx.fillStyle = "hsla(50, 100%, 50%, 0.2)";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		ctx.restore();
 
 		ctx.save();
 		ctx.fillStyle = "pink";
-		ctx.strokeStyle = "purple";
-		ctx.font = "90px fantasy";
+		ctx.strokeStyle = "pink";
+		ctx.font = "90px comic sans";
 
 		ctx.fillText(`${this.score}`, this.scoreX, this.scoreY);
 		ctx.strokeText(`${this.score}`, this.scoreX, this.scoreY);
@@ -229,7 +229,7 @@ class Tracer {
 		this.opacity = 1;
 
 		this.fadeRate = 0.1;
-		this.fadeInterval = 100;
+		this.fadeInterval = 300;
 		this.timeSinceFade = 0;
 	}
 
@@ -267,10 +267,10 @@ class SafePlatform {
 	constructor(g) {
 		this.game = g;
 		this.width = 400;
-		this.height = 32;
+		this.height = 150;
 
 		this.x = 0;
-		this.y = canvas.height - this.height * 1.5;
+		this.y = canvas.height - this.height * 0.5;
 
 		this.isVisible = true;
 	}
@@ -286,7 +286,7 @@ class SafePlatform {
 	render() {
 		if (!this.isVisible) return;
 		ctx.save();
-		ctx.fillStyle = "hsla(0, 0%, 20%, 1)";
+		ctx.fillStyle = `hsla(200, 50%, 50%, 1)`;
 		ctx.fillRect(this.x, this.y, this.width, this.height);
 		ctx.restore();
 	}
@@ -298,11 +298,11 @@ class ScorePlatform {
 	 */
 	constructor(g) {
 		this.game = g;
-		this.width = 32;
+		this.width = 64;
 		this.height = canvas.height;
 
 		this.x = 0;
-		this.y = canvas.height - 100;
+		this.y = canvas.height - 200 * Math.random(); // Random Score Platform Height
 
 		this.isVisible = true;
 
@@ -321,9 +321,10 @@ class ScorePlatform {
 	render() {
 		if (!this.isVisible) return;
 		ctx.save();
-		ctx.fillStyle = "hsla(120, 100%, 50%, 1)";
+		ctx.fillStyle = `hsla(${this.rainbow}, 50%, 50%, 0.8)`;
 		ctx.fillRect(this.x, this.y, this.width, this.height);
 		ctx.restore();
+		this.rainbow = this.rainbow + 2;
 	}
 }
 
