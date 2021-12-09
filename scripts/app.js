@@ -13,6 +13,12 @@ function parabollicEasing(pt) {
 	return y / 4;
 }
 
+alert(
+	"You will experience extreme emotional and psychological pain playing this game."
+);
+alert("Are you absolutely sure you want to continue?");
+alert("You made a mistake...");
+
 class KeyboardState {
 	constructor() {
 		this.isAccelerating = false;
@@ -98,6 +104,7 @@ class Player {
 	}
 
 	render() {
+		ctx.fillStyle = "hsla(30, 50%, 40%, 1)";
 		ctx.save();
 		ctx.beginPath();
 		ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
@@ -123,7 +130,7 @@ class Game {
 		this.wireUpListeners();
 
 		this.bgImage = new Image();
-		this.bgImage.src = "/images/waves_glow.png";
+		this.bgImage.src = "/images/w.jpg";
 
 		// w / 600 = 2048 / 1152
 
@@ -186,14 +193,14 @@ class Game {
 			this.imageHeight
 		);
 
-		ctx.fillStyle = "hsla(50, 100%, 50%, 0.2)";
+		ctx.fillStyle = "hsla(1, 100%, 50%, 0.1)";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		ctx.restore();
 
 		ctx.save();
-		ctx.fillStyle = "pink";
-		ctx.strokeStyle = "pink";
-		ctx.font = "90px comic sans";
+		ctx.fillStyle = "black";
+		ctx.strokeStyle = "black";
+		ctx.font = "90px impact";
 
 		ctx.fillText(`${this.score}`, this.scoreX, this.scoreY);
 		ctx.strokeText(`${this.score}`, this.scoreX, this.scoreY);
@@ -302,7 +309,7 @@ class ScorePlatform {
 		this.height = canvas.height;
 
 		this.x = 0;
-		this.y = canvas.height - 200 * Math.random(); // Random Score Platform Height
+		this.y = canvas.height - 400 * (Math.random() / 2); // Random Score Platform Height
 
 		this.isVisible = true;
 
@@ -315,16 +322,15 @@ class ScorePlatform {
 	 */
 	update(elapsedTime) {
 		this.x -= this.game.speed;
-		this.isVisible = this.x + this.width > 0;
+		this.isVisible = this.x + 1 + this.width > 0;
 	}
 
 	render() {
 		if (!this.isVisible) return;
 		ctx.save();
-		ctx.fillStyle = `hsla(${this.rainbow}, 50%, 50%, 0.8)`;
+		ctx.fillStyle = `hsla(230, 50%, 50%, 0.6)`;
 		ctx.fillRect(this.x, this.y, this.width, this.height);
 		ctx.restore();
-		this.rainbow = this.rainbow + 2;
 	}
 }
 
